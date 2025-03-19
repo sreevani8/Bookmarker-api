@@ -1,4 +1,4 @@
-package com.mulit.bookmarkerapi.DTO;
+package com.mulit.bookmarkerapi.dto;
 
 import com.mulit.bookmarkerapi.domain.BookMark;
 import org.springframework.stereotype.Component;

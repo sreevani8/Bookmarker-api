@@ -1,4 +1,4 @@
-package com.mulit.bookmarkerapi.DTO;
+package com.mulit.bookmarkerapi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

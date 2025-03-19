@@ -1,9 +1,8 @@
 package com.mulit.bookmarkerapi.service;
 
-import com.mulit.bookmarkerapi.DTO.BookmarkDTO;
-import com.mulit.bookmarkerapi.DTO.BookmarkMapper;
-import com.mulit.bookmarkerapi.DTO.BookmarksDTO;
-import com.mulit.bookmarkerapi.domain.BookMark;
+import com.mulit.bookmarkerapi.dto.BookmarkDTO;
+import com.mulit.bookmarkerapi.dto.BookmarkMapper;
+import com.mulit.bookmarkerapi.dto.BookmarksDTO;
 import com.mulit.bookmarkerapi.repository.BookmarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,8 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

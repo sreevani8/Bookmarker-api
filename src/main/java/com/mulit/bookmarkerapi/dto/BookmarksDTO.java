@@ -1,7 +1,6 @@
-package com.mulit.bookmarkerapi.DTO;
+package com.mulit.bookmarkerapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mulit.bookmarkerapi.domain.BookMark;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
