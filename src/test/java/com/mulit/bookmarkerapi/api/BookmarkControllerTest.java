@@ -29,10 +29,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-/*@TestPropertySource(properties = {
+@TestPropertySource(properties = {
         "spring.datasource.url=jdbc:tc:postgresql:14-alpine:///demo"
 
-})*/
+})
 public class BookmarkControllerTest {
 
     @Autowired

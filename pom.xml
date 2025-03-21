@@ -143,17 +143,52 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.3</version>
                 <configuration>
+                    <image>
+                        <name>sreevani724/bookmarker-api</name>
+                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.36</version>
+                            <!--<version>1.18.36</version>-->
                         </exclude>
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.5</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17-jre-focal</image>
+                    </from>
+                    <to>
+                        <image>sreevani724/bookmarker-api-jib</image>
+                        <auth>
+                            <username>sreevani724</username>
+                            <password>Hanvika@123</password>
+                        </auth>
+
+                        <tags>
+                            <tag>latest</tag>
+                            <tag>0.0.1</tag>
+                        </tags>
+
+
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
+                </configuration>
+            </plugin>
         </plugins>
+
+
     </build>
 
 </project>
