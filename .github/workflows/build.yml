@@ -27,8 +27,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check directories
-        run: ls -l /home/runner/work/Springboot-Kubernates/Springboot-Kubernates/
-
+        run: mkdir -p /home/runner/work/Springboot-Kubernates/Springboot-Kubernates/bookmarker-api
 
 
       - name: Set up JDK 17
