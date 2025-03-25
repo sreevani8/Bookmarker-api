@@ -1,5 +1,6 @@
 package com.mulit.bookmarkerapi.service;
 
+import com.mulit.bookmarkerapi.domain.BookmarkVM;
 import com.mulit.bookmarkerapi.dto.BookmarkDTO;
 import com.mulit.bookmarkerapi.dto.BookmarkMapper;
 import com.mulit.bookmarkerapi.dto.BookmarksDTO;
@@ -30,4 +31,14 @@ public class BookmarkService {
     }
 
 
+    @Transactional(readOnly = true)
+    public BookmarksDTO searchBookmarks(String query, Integer page) {
+        int pageNo = page<1?1:page-1;
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC,"createdAt");
+        Page<BookmarkDTO> bookmarkDTOPage=  bookmarkRepository.searchBookmarks(query, pageable) ;
+        Page<BookmarkVM> bookmarkVMPage=  bookmarkRepository.findByTitleContainsIgnoreCase(query, pageable) ;
+        return new BookmarksDTO(bookmarkDTOPage);
+
+
+    }
 }
