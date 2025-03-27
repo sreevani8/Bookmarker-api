@@ -1,5 +1,5 @@
 # springboot-kubernates
-Code for "SpringBoot + Kubernetes Tutorial"
+Code for "SpringBoot + Kubernates Tutorial"
 
 # How to run?
 $ git clone https://github.com/sreevani8/springboot-kubernetes.git
