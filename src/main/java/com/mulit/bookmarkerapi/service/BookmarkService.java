@@ -1,17 +1,28 @@
 package com.mulit.bookmarkerapi.service;
 
+import com.mulit.bookmarkerapi.domain.BookMark;
 import com.mulit.bookmarkerapi.domain.BookmarkVM;
+import com.mulit.bookmarkerapi.domain.CreateBookmarkRequest;
 import com.mulit.bookmarkerapi.dto.BookmarkDTO;
 import com.mulit.bookmarkerapi.dto.BookmarkMapper;
 import com.mulit.bookmarkerapi.dto.BookmarksDTO;
 import com.mulit.bookmarkerapi.repository.BookmarkRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.time.Instant;
+
+
+
 
 @Service
 @Transactional
@@ -39,6 +50,14 @@ public class BookmarkService {
         Page<BookmarkVM> bookmarkVMPage=  bookmarkRepository.findByTitleContainsIgnoreCase(query, pageable) ;
         return new BookmarksDTO(bookmarkDTOPage);
 
+
+    }
+
+
+    public BookmarkDTO createBookmark(@Valid CreateBookmarkRequest request) {
+        BookMark bookmark = new BookMark(null,request.getTitle(), request.getUrl(), Instant.now());
+        BookMark savedBookmark = bookmarkRepository.save(bookmark);
+         return bookmarkMapper.toDTO(savedBookmark);
 
     }
 }

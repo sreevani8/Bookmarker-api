@@ -3,7 +3,6 @@ package com.mulit.bookmarkerapi.api;
 
 import com.mulit.bookmarkerapi.domain.BookMark;
 import com.mulit.bookmarkerapi.repository.BookmarkRepository;
-import com.mulit.bookmarkerapi.service.BookmarkService;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,19 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.http.MediaType;
 
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -74,6 +78,7 @@ public class BookmarkControllerTest {
             "1,15,2,1,true,false,true,false",
             "2,15,2,2,false,true,false,true"
     })
+
     void shouldGetBookmarks(int pageNo, int totalElements, int totalPages, int currentPage, boolean isFirst, boolean isLast, boolean hasNext, boolean hasPrevious ) throws Exception {
 
 
@@ -90,6 +95,47 @@ public class BookmarkControllerTest {
             ;
 
 
+    }
+
+    @Test
+    void shouldCreateBookmarkSuccessfully() throws Exception {
+        this.mvc.perform(
+                post("/api/bookmarks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "title": "Sreevani Blog",
+                                "url": "https://sreevani.in"
+                                }
+                                """)
+        )
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.title", is("Sreevani Blog")))
+                .andExpect(jsonPath("$.url", is("https://sreevani.in")));
+    }
+
+    @Test
+    void shouldFailToCreteBookmarkWhenUrlIsNotPresent() throws Exception {
+        this.mvc.perform(
+                post("/api/bookmarks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                  {
+                                      "title": "Sreevani Blog"
+                            
+                                  }
+                                  """)
+        )
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string("Content-Type", is("application/problem+json")))
+                .andExpect(jsonPath("$.type", is("https://zalando.github.io/problem/constraint-violation")))
+                .andExpect(jsonPath("$.title", is("Constraint Violation")))
+                .andExpect(jsonPath("$.status", is(400)))
+                .andExpect(jsonPath("$.violations", hasSize(1)))
+                .andExpect(jsonPath("$.violations[0].field", is("url")))
+                .andExpect(jsonPath("$.violations[0].message", is("Url should not be empty")))
+                .andReturn();
     }
 
 

@@ -1,8 +1,10 @@
 package com.mulit.bookmarkerapi.api;
 
+import com.mulit.bookmarkerapi.domain.CreateBookmarkRequest;
 import com.mulit.bookmarkerapi.dto.BookmarkDTO;
 import com.mulit.bookmarkerapi.dto.BookmarksDTO;
 import com.mulit.bookmarkerapi.service.BookmarkService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,8 @@ public class BookmarkController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createBookmark(Object bookmarkDTO) {
+    public BookmarkDTO createBookmark(@RequestBody @Valid CreateBookmarkRequest request) {
+        return bookmarkService.createBookmark(request);
         
 
     }
