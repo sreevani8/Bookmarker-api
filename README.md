@@ -2,7 +2,7 @@
 Code for "SpringBoot + Kubernates Tutorial"
 
 # How to run?
-$ git clone https://github.com/sreevani8/springboot-kubernetes.git
+$ git clone https://github.com/sreevani8/springboot-kubernates.git
 $ cd springboot-kubernetes
 $ ./run.sh start
 $ ./run.sh stop
