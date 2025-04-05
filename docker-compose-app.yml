@@ -2,7 +2,7 @@
 services:
   bookmarker-api:
     build:
-      context: bookmarker-api
+
       dockerfile: Dockerfile.layered
     environment:
       SPRING_PROFILES_ACTIVE: docker
