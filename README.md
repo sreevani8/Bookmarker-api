@@ -1,9 +1,9 @@
-# springboot-kubernates
+# Bookmarker-api
 Code for "SpringBoot + Kubernates Tutorial"
 
 # How to run?
-$ git clone https://github.com/sreevani8/springboot-kubernates.git
-$ cd springboot-kubernetes
+$ git clone https://github.com/sreevani8/Bookmarker-api.git
+$ cd Bookmarker-api
 $ ./run.sh start
 $ ./run.sh stop
 
