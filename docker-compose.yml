@@ -8,4 +8,9 @@ services:
       - POSTGRES_DB=appdb
     ports:
       - "15432:5432"
+    networks:
+      - bookmarker-network
 
+networks:
+  bookmarker-network:
+    external: true
